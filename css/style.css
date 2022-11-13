@@ -1,0 +1,158 @@
+body{ 
+background: black;
+background-image: url(../img/bg.png);
+background-repeat: no-repeat;
+	font-family: Bebas Neue;
+}
+canvas{
+	opacity:  0.3;
+}
+section{
+	padding-top: 60px;
+}
+.container{
+	width: 1620px;
+	margin: auto;
+	background-repeat: no-repeat;
+	background-position: -10;
+	padding-top: 250px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top:5%;
+	z-index: 99999;
+}
+.works{
+	padding-top: 20px!important;
+}
+.works h1{
+	font-size: 40px;
+}
+.works h1::after{
+	font-size: 40px;
+	margin: 0 20px 0 20px;
+	content: '';
+	display: inline-block;
+	width: 300px;
+	height: 1px;
+	background-color: white;
+	vertical-align: middle;
+}
+h1{
+	font-size: 195px;
+	font-weight: 400;
+	line-height: 156px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: #FFFFFF;
+	margin: 0;
+}
+.brdr{
+	-webkit-text-stroke: 2px #FFF;
+	-webkit-text-fill-color: transparent;
+}
+ul{
+	font-size: 16px;
+	color: #ffffff;
+	list-style: none;
+	margin: 0;
+	padding: 40px 0;
+}
+li{
+	display: inline;
+	margin: 0;
+}
+a{
+	text-decoration: none;
+	color: #ffffff;
+}
+.work::before{
+	margin: 0 20px 0 0;
+	content: '';
+	display: inline-block;
+	width: 117px;
+	height: 1px;
+	background-color: white;
+	vertical-align: middle;
+}
+.work:hover{
+	opacity: 0.7;
+	transition: 0.7s.;
+}
+.contacts::before{
+	margin: 0 20px 0 20px;
+	content: '';
+	display: inline-block;
+	width: 20px;
+	height: 1px;
+	background-color: white;
+	vertical-align: middle;
+}
+.content{
+	position: relative;
+	z-index: 9999999999;
+	max-width: 1620px;
+	background-color: white;
+	width: 100%;
+	height: 700px;
+	display: block;
+	margin: auto;
+	padding: 50px 90px;
+	margin-top: 45px;
+	overflow: auto;
+}
+.line_y{
+	height: 300px; 
+	width: 1px; 
+	background-color: #ffffff; 
+	opacity: 0.5;
+	position: absolute;
+	left: 71%;
+	top: 5%;
+	z-index: 888;
+}
+.line_x{
+	height: 1px; 
+	width: 80%; 
+	background-color: #ffffff; 
+	opacity: 0.5;
+	position: absolute;
+	top: 10%;
+	right: 10%;
+	z-index: 888;
+}
+.title h1{
+	color: #1B1B1B;
+	font-size: 85px;
+	line-height: 0.7;
+	margin-top: 20px;
+}
+.title h1::after{
+	margin: 0 0 0 40px;
+	content: '';
+	display: inline-block;
+	width: 170px;
+	height: 5px;
+	background-color: black;
+	vertical-align: bottom;
+}
+.title a{
+	font-size: 18px;
+	color: #1B1B1B;
+	text-align: right;
+	display: block;
+	text-decoration: none;
+}
+.grid{
+	padding-top: 70px;
+	display: flex;
+	  flex-wrap:wrap ;
+	justify-content: space-between;
+	  align-items: baseline;
+}
+.title h2{
+	color: #1B1B1B;
+	font-size: 16px;
+	line-height: 0.7;
+	margin-top: 80px;
+}
