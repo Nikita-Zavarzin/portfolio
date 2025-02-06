@@ -22,7 +22,7 @@ section{
 	z-index: 99999;
 }
 .container{
-	color: #ffffff;
+	color: #F3F4E1;
 	z-index: 1;
 	position: relative;
 	display: flex;
@@ -35,6 +35,7 @@ section{
 	text-transform: uppercase;
 	text-align: center;
 	margin-bottom: 25px;
+	color: #F3F4E1;
 }
 .container h2{
 	margin-top: 0;
@@ -44,6 +45,7 @@ section{
 	text-transform: uppercase;
 	text-align: center;
 	margin-bottom: 40px;
+	color: #F3F4E1;
 }
 .blur_title{
 	filter: blur(5px);
@@ -68,8 +70,8 @@ button{
 	display: block;
 	margin: auto;
 	background: none;
-	border: 1px solid #ffffff;
-	color: #ffffff;
+	border: 1px solid #F3F4E1;
+	color: #F3F4E1;
 	font-size: 20px;
 	font-weight: 300!important;
 	padding: 10px 30px;
