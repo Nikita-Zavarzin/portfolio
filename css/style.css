@@ -12,7 +12,8 @@ section{
 	width: 100%;
 }
 .wrapper{
-	width: 1620px;
+	width: 100%;
+	max-width: 1620px;
 	margin: auto;
 	background-image: url(.../img/bg_splash.webm);
 	background-repeat: no-repeat;
