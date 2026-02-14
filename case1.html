@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Дизайнер | Заварзин Никита</title>
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+	<section class="outer">
+		<div class="container">
+			<div class="bar"><a href="index.html">← Back to portfolio</a></div>
+			<div class="case_title">
+				<h1 style="margin-top: 0; padding-top: 0;">KFC/ROSTIC’S</h1>
+				<div class="bage_line"><span class="bage">email</span><span class="bage">in-app's</span><span class="bage">pop-up's</span></div>
+			</div>
+			<div class="case">
+				<div class="about">
+					<div class="inner">
+					<h2 style="margin-top: 0; margin-bottom: 0;">Задача</h2>
+					<p style="margin-top: 5px;">Привести к&nbsp;единому стандарту рассылки, которые до&nbsp;моего прихода создавались разными командами без общей системы: разная типографика, хаотичные отступы, перегруженные композиции, длинные рассылки.</p>
+					<h2 style="margin-top: 0; margin-bottom: 0;">Цель</h2>
+					<p style="margin-top: 5px;">Повысить сканируемость писем и&nbsp;конверсию в&nbsp;заказ.</p>
+
+					<h2 style="margin-top: 0; margin-bottom: 0;">Что я сделал</h2>
+					<p style="margin-top: 5px;"><b>Внедрил принцип &laquo;5&nbsp;секунд&raquo;</b>: убедил команду, что письмо должно читаться за&nbsp;5&nbsp;секунд&nbsp;&mdash;&nbsp;говорящий визуал&raquo; &rarr; выгода &rarr; CTA.<br><br>По-итогу: сократился второстепенный текст, сократился объём контента на&nbsp;40%, оставив только ключевое сообщение.</p>
+					<p><b>Оформил дизайн-гайд для email</b> c&nbsp;учетом текущих рассылок: другие дизайнеры в агенстве разрабатывая новый дизайн легко готовят новые рассылки сохраняя применственность: письма выглядят понятно и&nbsp;знакомо для&nbsp;получателей.</p>
+					<p style="margin-bottom: 30px;">Привел in-app уведомления в общий вид, в коллаборации с дизайн-командой Rostic's.<br><span style="opacity: 0.5; font-size: 14px;">(я не стал размещать in-app-ы времен KFC, потому что они потеряли актуальность. Но они были не хуже!)</span></p>
+					<h2 style="margin-top: 0; margin-bottom: 0;">Результат</h2>
+					<p style="margin-bottom: 30px; margin-top: 0;">NDA</p>
+                    <a href="https://www.figma.com/design/NzW8XSmU3eJtXTVLvkv6yA/%D0%9D%D0%B8%D0%BA%D0%B8%D1%82%D0%B0-%D0%97%D0%B0%D0%B2%D0%B0%D1%80%D0%B7%D0%B8%D0%BD-%7C-%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE?node-id=0-1&t=ejGioY3IWyZ5tCUH-1" target="_blank"><button class="figma_bt">Посмотреть в FIGMA</button></a>
+					<a href="https://t.me/nikita_zavarzin" target="_blank"><button class="telegram_bt">Заказать дизайн</button></a>
+					</div>
+				</div>
+				<div class="case-preview">
+		            <div class="email-preview-container">
+		                <div class="preview-wrapper">
+		                    <div class="preview-area" id="previewArea">
+		                        <img src="img/email_1.png" alt="Email preview 1" class="preview-image" id="currentPreview">
+		                    </div>
+		                    <div class="slider-controls">
+		                        <button class="nav-btn" id="prevBtn">◀</button>
+		                        <div class="dots-container" id="dotsContainer">
+		                            <button class="dot active" data-index="0"></button>
+		                            <button class="dot" data-index="1"></button>
+		                            <button class="dot" data-index="2"></button>
+		                            <button class="dot" data-index="3"></button>
+		                            <button class="dot" data-index="4"></button>
+		                        </div>
+		                        <button class="nav-btn" id="nextBtn">▶</button>
+		                    </div>
+		                </div>
+		            </div>					
+				</div>
+			</div>
+		</div>
+	</section>
+</body> 
+    <!-- фулскрин  -->
+    <div class="modal" id="emailModal">
+        <div class="modal-content">
+            <div class="modal-image-container">
+                <img src="img/email_1.png" alt="Full email view" class="modal-image" id="modalImage">
+            </div>
+            <div class="modal-controls">
+                <div class="modal-nav">
+                    <button class="nav-btn" id="modalPrevBtn">◀</button>
+                    <button class="nav-btn" id="modalNextBtn">▶</button>
+                </div>
+                <div class="modal-count" id="modalCounter">1 of 5</div>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const element = document.querySelector('.bar');
+          if (!element) return;
+
+          const updateHighlight = (e) => {
+            const rect = element.getBoundingClientRect();
+            const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+            element.style.setProperty('--mouse-x', `${x}%`);
+          };
+
+          document.addEventListener('mousemove', updateHighlight);
+
+
+          document.addEventListener('mouseleave', () => {
+            element.style.removeProperty('--mouse-x');
+          });
+        });
+
+//////////////////////////////////////////////////////////////
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // превью
+            const emails = [
+                { src: 'img/email_1.png', alt: 'Ярко, бодряще' },
+                { src: 'img/email_2.png', alt: 'Италия Меню' },
+                { src: 'img/email_3.png', alt: 'Пробуй новинки' },
+                { src: 'img/inapps_1.png', alt: 'In apps' },
+                { src: 'img/pop_up2.png', alt: 'Pop up' }
+            ];
+            
+            // навигация
+            const currentPreview = document.getElementById('currentPreview');
+            const previewArea = document.getElementById('previewArea');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dots = document.querySelectorAll('.dot');
+            const emailModal = document.getElementById('emailModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalPrevBtn = document.getElementById('modalPrevBtn');
+            const modalNextBtn = document.getElementById('modalNextBtn');
+            const closeModalBtn = document.getElementById('closeModal');
+            const modalCounter = document.getElementById('modalCounter');
+            
+            // зачем вы смотрите верстку? лучше напишите мне
+            let currentSlide = 0;
+            let currentModalSlide = 0;
+            
+            const updateSlider = (index) => {
+                currentPreview.src = emails[index].src;
+                currentPreview.alt = emails[index].alt;
+                
+                // кол-во точек
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+                
+                // кнопки
+                prevBtn.disabled = index === 0;
+                nextBtn.disabled = index === emails.length - 1;
+            };
+            
+            const updateModal = (index) => {
+                modalImage.src = emails[index].src;
+                modalImage.alt = `Full view of ${emails[index].alt}`;
+                modalCounter.textContent = `Email ${index + 1} of ${emails.length}`;
+                currentModalSlide = index;
+            };
+            
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSlider(currentSlide);
+                }
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < emails.length - 1) {
+                    currentSlide++;
+                    updateSlider(currentSlide);
+                }
+            });
+            
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const index = parseInt(dot.getAttribute('data-index'));
+                    currentSlide = index;
+                    updateSlider(currentSlide);
+                });
+            });
+            
+            previewArea.addEventListener('click', () => {
+                currentModalSlide = currentSlide;
+                updateModal(currentModalSlide);
+                emailModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            modalPrevBtn.addEventListener('click', () => {
+                if (currentModalSlide > 0) {
+                    currentModalSlide--;
+                    updateModal(currentModalSlide);
+                }
+            });
+            
+            modalNextBtn.addEventListener('click', () => {
+                if (currentModalSlide < emails.length - 1) {
+                    currentModalSlide++;
+                    updateModal(currentModalSlide);
+                }
+            });
+            
+            closeModalBtn.addEventListener('click', () => {
+                emailModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            emailModal.addEventListener('click', (e) => {
+                if (e.target === emailModal) {
+                    emailModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (emailModal.classList.contains('active')) {
+                    if (e.key === 'ArrowLeft' && currentModalSlide > 0) {
+                        currentModalSlide--;
+                        updateModal(currentModalSlide);
+                    } else if (e.key === 'ArrowRight' && currentModalSlide < emails.length - 1) {
+                        currentModalSlide++;
+                        updateModal(currentModalSlide);
+                    } else if (e.key === 'Escape') {
+                        emailModal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+            });
+            
+            updateSlider(currentSlide);
+        });
+    </script>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Дизайнер | Заварзин Никита</title>
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+	<section class="outer">
+		<div class="container">
+			<div class="bar"><a href="index.html">← Back to portfolio</a></div>
+			<div class="case_title">
+				<h1 style="margin-top: 0; padding-top: 0;">RAVE ON TREND</h1>
+				<div class="bage_line"><span class="bage">email</span>м<span class="bage">pop-up's</span></div>
+			</div>
+			<div class="case">
+				<div class="about">
+					<div class=" ">
+					<h2 style="margin-top: 0; margin-bottom: 0;">Задача</h2>
+					<p style="margin-top: 5px;">Разработать визуальную систему для всех типов email-рассылок: автоматические цепочки (воронки) и&nbsp;промо-кампании. Цель&nbsp;&mdash; создать узнаваемый, эмоциональный и&nbsp;функциональный дизайн, усиливающий вовлечённость аудитории.</p>
+					<h2 style="margin-top: 0; margin-bottom: 0;">Цель</h2>
+					<p style="margin-top: 5px;">Повысить сканируемость писем и&nbsp;конверсию в&nbsp;заказ.</p>
+
+					<h2 style="margin-top: 0; margin-bottom: 0;">Что я сделал</h2>
+					<p style="margin-top: 5px;">Полностью обновил визуальное оформление 5 ключевых потоков: приветственная серия, брошенная корзина, лояльность, реактивация. Для каждого этапа разработал уникальную композицию с акцентом на живой главный триггер — товар, скидку или эмоцию. 
+                    </p>
+					<h2 style="margin-top: 0; margin-bottom: 0;">Результат</h2>
+					<p style="margin-bottom: 30px; margin-top: 0;">Дизайн стал ключевым драйвером вовлечённости в обновлённых рассылках:<br>
+
+   Рост конверсии вырос на 27% после обновления визуала (акцент на товар + упрощённый CTA)<Br>
+    Средний CTR по промо-рассылкам вырос на 18% за 3 месяца, после запуска обновленного дизайна.</p>
+     <a href="https://www.figma.com/design/NzW8XSmU3eJtXTVLvkv6yA/%D0%9D%D0%B8%D0%BA%D0%B8%D1%82%D0%B0-%D0%97%D0%B0%D0%B2%D0%B0%D1%80%D0%B7%D0%B8%D0%BD-%7C-%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE?node-id=1-4777&t=ejGioY3IWyZ5tCUH-1" target="_blank"><button class="figma_bt">Посмотреть в FIGMA</button></a>
+					<a href="https://t.me/nikita_zavarzin" target="_blank"><button class="telegram_bt">Заказать дизайн <span style="opacity: 0.5;">*</span></button></a>
+					</div>
+				</div>
+				<div class="case-preview">
+		            <div class="email-preview-container">
+		                <div class="preview-wrapper">
+		                    <div class="preview-area" id="previewArea">
+		                        <img src="img/email_4.png" alt="Email preview 1" class="preview-image" id="currentPreview">
+		                    </div>
+		                    <div class="slider-controls">
+		                        <button class="nav-btn" id="prevBtn">◀</button>
+		                        <div class="dots-container" id="dotsContainer">
+		                            <button class="dot active" data-index="0"></button>
+		                            <button class="dot" data-index="1"></button>
+		                            <button class="dot" data-index="2"></button>
+		                            <button class="dot" data-index="3"></button>
+		                            <button class="dot" data-index="4"></button>
+		                        </div>
+		                        <button class="nav-btn" id="nextBtn">▶</button>
+		                    </div>
+		                </div>
+		            </div>					
+				</div>
+			</div>
+		</div>
+	</section>
+</body> 
+    <!-- фулскрин  -->
+    <div class="modal" id="emailModal">
+        <div class="modal-content">
+            <div class="modal-image-container">
+                <img src="img/email_1.png" alt="Full email view" class="modal-image" id="modalImage">
+            </div>
+            <div class="modal-controls">
+                <div class="modal-nav">
+                    <button class="nav-btn" id="modalPrevBtn">◀</button>
+                    <button class="nav-btn" id="modalNextBtn">▶</button>
+                </div>
+                <div class="modal-count" id="modalCounter">Email 1 of 5</div>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+        </div>
+    </div>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const element = document.querySelector('.bar');
+  if (!element) return;
+
+  const updateHighlight = (e) => {
+    const rect = element.getBoundingClientRect();
+    const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+    element.style.setProperty('--mouse-x', `${x}%`);
+  };
+
+  document.addEventListener('mousemove', updateHighlight);
+
+
+  document.addEventListener('mouseleave', () => {
+    element.style.removeProperty('--mouse-x');
+  });
+});
+
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // превью
+            const emails = [
+                { src: 'img/email_4.png', alt: 'MNMLST BY RAVE' },
+                { src: 'img/email_5.png', alt: 'The best fits you haven’t seen yet.' },
+                { src: 'img/email_6.png', alt: 'Serving looks and turkey this year.' },
+                { src: 'img/pop_up1.png', alt: 'Loyalty Program Update' },
+                { src: 'img/email_7.png', alt: 'Welcome to Drop 4.' }
+            ];
+            
+            // навигация
+            const currentPreview = document.getElementById('currentPreview');
+            const previewArea = document.getElementById('previewArea');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dots = document.querySelectorAll('.dot');
+            const emailModal = document.getElementById('emailModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalPrevBtn = document.getElementById('modalPrevBtn');
+            const modalNextBtn = document.getElementById('modalNextBtn');
+            const closeModalBtn = document.getElementById('closeModal');
+            const modalCounter = document.getElementById('modalCounter');
+            
+            // зачем вы смотрите верстку? лучше напишите мне
+            let currentSlide = 0;
+            let currentModalSlide = 0;
+            
+            // Актуализируем картинки, без кэша
+            const updateSlider = (index) => {
+                currentPreview.src = emails[index].src;
+                currentPreview.alt = emails[index].alt;
+                
+                // кол-во точек
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+                
+                // кнопки
+                prevBtn.disabled = index === 0;
+                nextBtn.disabled = index === emails.length - 1;
+            };
+            
+            // Update modal
+            const updateModal = (index) => {
+                modalImage.src = emails[index].src;
+                modalImage.alt = `Full view of ${emails[index].alt}`;
+                modalCounter.textContent = `Email ${index + 1} of ${emails.length}`;
+                currentModalSlide = index;
+            };
+            
+            // Event Listeners
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSlider(currentSlide);
+                }
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < emails.length - 1) {
+                    currentSlide++;
+                    updateSlider(currentSlide);
+                }
+            });
+            
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const index = parseInt(dot.getAttribute('data-index'));
+                    currentSlide = index;
+                    updateSlider(currentSlide);
+                });
+            });
+            
+            // Open modal on preview click
+            previewArea.addEventListener('click', () => {
+                currentModalSlide = currentSlide;
+                updateModal(currentModalSlide);
+                emailModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Modal navigation
+            modalPrevBtn.addEventListener('click', () => {
+                if (currentModalSlide > 0) {
+                    currentModalSlide--;
+                    updateModal(currentModalSlide);
+                }
+            });
+            
+            modalNextBtn.addEventListener('click', () => {
+                if (currentModalSlide < emails.length - 1) {
+                    currentModalSlide++;
+                    updateModal(currentModalSlide);
+                }
+            });
+            
+            // Close modal
+            closeModalBtn.addEventListener('click', () => {
+                emailModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside content
+            emailModal.addEventListener('click', (e) => {
+                if (e.target === emailModal) {
+                    emailModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (emailModal.classList.contains('active')) {
+                    if (e.key === 'ArrowLeft' && currentModalSlide > 0) {
+                        currentModalSlide--;
+                        updateModal(currentModalSlide);
+                    } else if (e.key === 'ArrowRight' && currentModalSlide < emails.length - 1) {
+                        currentModalSlide++;
+                        updateModal(currentModalSlide);
+                    } else if (e.key === 'Escape') {
+                        emailModal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+            });
+            
+            // Initialize slider
+            updateSlider(currentSlide);
+        });
+    </script>
+</html>
