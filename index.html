@@ -77,62 +77,37 @@
   const ctx = canvas.getContext('2d', { alpha: false });
 
   let W = 0, H = 0;
-  // Wave anchor: fixed px from top of container (set on first buildCaches)
-  const WAVE_TOP_PX = 340; // roughly "first screen" vertical center feel
+  const WAVE_Y = 400; // fixed px from top — stays in hero area
 
-  // ── Pre-baked offscreen assets, rebuilt only on resize ────────────────────
-  let vigCanvas  = null; // vignette (top portion only)
-  let blobCanvas = null; // static atmosphere blobs (redrawn each frame at low cost)
-  let waveGrd1   = null;
-  let waveGrd2   = null;
-
-  // Pre-rendered soft dot for particles — drawn with drawImage, zero shadowBlur
-  const DOT_R = 12; // max radius of glow sprite
-  let dotCyan  = null;
-  let dotAmber = null;
+  const DOT_R = 12;
+  let dotCyan = null, dotAmber = null;
+  let waveGrd1 = null, waveGrd2 = null;
 
   function makeDotSprite(color) {
-    const size = DOT_R * 2 + 2;
+    const sz = DOT_R * 2 + 2;
     const oc = document.createElement('canvas');
-    oc.width = oc.height = size;
+    oc.width = oc.height = sz;
     const ox = oc.getContext('2d');
-    const cx = size / 2, cy = size / 2;
-    // outer soft halo
-    const g = ox.createRadialGradient(cx,cy,0, cx,cy,DOT_R);
-    g.addColorStop(0,   color.replace('A', '0.95'));
-    g.addColorStop(0.35,color.replace('A', '0.5'));
-    g.addColorStop(1,   color.replace('A', '0'));
+    const c = sz / 2;
+    const g = ox.createRadialGradient(c,c,0, c,c,DOT_R);
+    g.addColorStop(0,    color.replace('A','0.95'));
+    g.addColorStop(0.35, color.replace('A','0.5'));
+    g.addColorStop(1,    color.replace('A','0'));
     ox.fillStyle = g;
-    ox.beginPath(); ox.arc(cx,cy,DOT_R,0,Math.PI*2); ox.fill();
+    ox.beginPath(); ox.arc(c,c,DOT_R,0,Math.PI*2); ox.fill();
     return oc;
   }
 
   function buildCaches() {
     W = canvas.width  = container.offsetWidth;
     H = canvas.height = container.offsetHeight;
-
-    // Dot sprites (tiny, fast drawImage instead of arc+shadowBlur)
     dotCyan  = makeDotSprite('hsla(185,100%,65%,A)');
     dotAmber = makeDotSprite('hsla(35,100%,62%,A)');
-
-    // Vignette — only covers top viewport-height worth for perf
-    const VH = Math.min(H, window.innerHeight);
-    vigCanvas = document.createElement('canvas');
-    vigCanvas.width = W; vigCanvas.height = VH;
-    const vc = vigCanvas.getContext('2d');
-    const vig = vc.createRadialGradient(W/2,VH/2,VH*0.1, W/2,VH/2,VH*0.82);
-    vig.addColorStop(0, 'rgba(0,0,0,0)');
-    vig.addColorStop(1, 'rgba(0,0,0,0.60)');
-    vc.fillStyle = vig;
-    vc.fillRect(0,0,W,VH);
-
-    // Wave gradients
     waveGrd1 = ctx.createLinearGradient(0,0,W,0);
     waveGrd1.addColorStop(0,   'rgba(0,200,200,0.7)');
     waveGrd1.addColorStop(0.4, 'rgba(80,255,240,1)');
     waveGrd1.addColorStop(0.7, 'rgba(0,200,200,0.7)');
     waveGrd1.addColorStop(1,   'rgba(80,255,240,1)');
-
     waveGrd2 = ctx.createLinearGradient(0,0,W,0);
     waveGrd2.addColorStop(0,   'rgba(0,180,180,0.55)');
     waveGrd2.addColorStop(0.4, 'rgba(0,230,210,0.85)');
@@ -142,20 +117,19 @@
   buildCaches();
   new ResizeObserver(buildCaches).observe(container);
 
-  // ── Particles ─────────────────────────────────────────────────────────────
+  // ── Particles ──────────────────────────────────────────────────────────────
   const MAX_P = 110;
   const parts  = [];
-
   function spawnParticle(forceSide) {
     const side = forceSide || (Math.random() < 0.5 ? 'left' : 'right');
-    const fl   = side === 'left';
+    const fl = side === 'left';
     return {
       x:       fl ? -DOT_R - Math.random()*16 : W + DOT_R + Math.random()*16,
       y:       Math.random() * H,
-      vx:      fl ? (0.5 + Math.random()*1.0) : -(0.5 + Math.random()*1.0),
+      vx:      fl ? (0.2 + Math.random()*1.0) : -(0.5 + Math.random()*1.0),
       vy:      (Math.random() - 0.5) * 0.4,
       drift:   (Math.random() - 0.5) * 0.009,
-      scale:   0.25 + Math.random() * 0.75, // sprite scale
+      scale:   0.25 + Math.random() * 0.75,
       life:    forceSide ? 0 : Math.floor(Math.random() * 180),
       maxLife: 130 + Math.random() * 160,
       cyan:    Math.random() < 0.52,
@@ -164,22 +138,20 @@
   }
   for (let i = 0; i < MAX_P; i++) parts.push(spawnParticle());
 
-  // ── Wave points ───────────────────────────────────────────────────────────
+  // ── Wave ───────────────────────────────────────────────────────────────────
   const STEPS = 100;
-  const wPts1  = new Float32Array(STEPS + 1);
-  const wPts2  = new Float32Array(STEPS + 1);
+  const wPts1 = new Float32Array(STEPS + 1);
+  const wPts2 = new Float32Array(STEPS + 1);
 
   function computeWaves(t) {
-    const amp = Math.min(H, window.innerHeight) * 0.13; // amplitude relative to viewport
+    const amp = window.innerHeight * 0.06;
     for (let i = 0; i <= STEPS; i++) {
       const nx = i / STEPS;
-      // Base Y anchored near top, not mid-container
-      const base = WAVE_TOP_PX;
-      wPts1[i] = base
+      wPts1[i] = WAVE_Y
         + Math.sin(nx * Math.PI * 2.2 + t * 0.9)  * amp * 0.85
         + Math.sin(nx * Math.PI * 3.7 - t * 0.6)  * amp * 0.5
         + Math.sin(nx * Math.PI * 1.1 + t * 0.4)  * amp * 0.3;
-      wPts2[i] = base
+      wPts2[i] = WAVE_Y
         + Math.sin(nx * Math.PI * 2.2 + t * 0.9 + 0.6) * amp * 0.65
         + Math.sin(nx * Math.PI * 4.1 - t * 0.55)      * amp * 0.38
         + Math.sin(nx * Math.PI * 1.5 + t * 0.35)      * amp * 0.23;
@@ -189,38 +161,25 @@
   function strokeWave(pts, grd, alpha, thick) {
     ctx.save();
     ctx.strokeStyle = grd;
-    // Glow pass (no shadowBlur — just wide semi-transparent stroke)
     ctx.lineWidth   = thick * 5;
-    ctx.globalAlpha = alpha * 0.22;
+    ctx.globalAlpha = alpha * 0.18;
     ctx.beginPath();
-    for (let i = 0; i <= STEPS; i++) {
-      const x = (i/STEPS)*W;
-      i===0 ? ctx.moveTo(x, pts[i]) : ctx.lineTo(x, pts[i]);
-    }
+    for (let i = 0; i <= STEPS; i++) { const x=(i/STEPS)*W; i===0?ctx.moveTo(x,pts[i]):ctx.lineTo(x,pts[i]); }
     ctx.stroke();
-    // Medium glow
-    ctx.lineWidth   = thick * 2.5;
-    ctx.globalAlpha = alpha * 0.45;
+    ctx.lineWidth   = thick * 2;
+    ctx.globalAlpha = alpha * 0.40;
     ctx.beginPath();
-    for (let i = 0; i <= STEPS; i++) {
-      const x = (i/STEPS)*W;
-      i===0 ? ctx.moveTo(x, pts[i]) : ctx.lineTo(x, pts[i]);
-    }
+    for (let i = 0; i <= STEPS; i++) { const x=(i/STEPS)*W; i===0?ctx.moveTo(x,pts[i]):ctx.lineTo(x,pts[i]); }
     ctx.stroke();
-    // Core
     ctx.lineWidth   = thick;
     ctx.globalAlpha = alpha;
     ctx.beginPath();
-    for (let i = 0; i <= STEPS; i++) {
-      const x = (i/STEPS)*W;
-      i===0 ? ctx.moveTo(x, pts[i]) : ctx.lineTo(x, pts[i]);
-    }
+    for (let i = 0; i <= STEPS; i++) { const x=(i/STEPS)*W; i===0?ctx.moveTo(x,pts[i]):ctx.lineTo(x,pts[i]); }
     ctx.stroke();
     ctx.restore();
   }
 
-  // ── Atmosphere blobs — redrawn each frame but NO radialGradient creation ──
-  // Pre-render blobs to an offscreen once, animate by offsetting + alpha only
+  // ── Blobs ──────────────────────────────────────────────────────────────────
   const BLOBS = [
     {x:0.12,y:0.20,r:0.27,a:0.09,rgb:'0,210,200'},
     {x:0.50,y:0.48,r:0.23,a:0.08,rgb:'0,180,200'},
@@ -229,19 +188,16 @@
     {x:0.70,y:0.28,r:0.21,a:0.08,rgb:'210,130,15'},
     {x:0.58,y:0.90,r:0.19,a:0.06,rgb:'210,120,20'},
   ];
-  // Cache blob sprites (one per blob, fixed size)
   const blobSprites = BLOBS.map(b => {
-    const r  = Math.round(b.r * 1400); // use 1400px as reference width
-    const sz = r * 2;
+    const r = Math.round(b.r * 1400), sz = r * 2;
     const oc = document.createElement('canvas');
     oc.width = oc.height = sz;
     const ox = oc.getContext('2d');
-    const g  = ox.createRadialGradient(r,r,0, r,r,r);
+    const g = ox.createRadialGradient(r,r,0, r,r,r);
     g.addColorStop(0,    `rgba(${b.rgb},${b.a})`);
     g.addColorStop(0.45, `rgba(${b.rgb},${b.a*0.3})`);
     g.addColorStop(1,    `rgba(${b.rgb},0)`);
-    ox.fillStyle = g;
-    ox.fillRect(0,0,sz,sz);
+    ox.fillStyle = g; ox.fillRect(0,0,sz,sz);
     return { oc, r };
   });
 
@@ -249,65 +205,50 @@
     ctx.save();
     ctx.globalCompositeOperation = 'screen';
     for (let i = 0; i < BLOBS.length; i++) {
-      const b   = BLOBS[i];
-      const sp  = blobSprites[i];
-      const scl = (W / 1400) * (1 + 0.055*Math.sin(t*0.45 + b.x*4));
-      const dx  = b.x*W - sp.r*scl;
-      const dy  = b.y*H + Math.sin(t*0.28 + b.x)*H*0.022 - sp.r*scl;
+      const b = BLOBS[i], sp = blobSprites[i];
+      const scl = (W/1400) * (1 + 0.055*Math.sin(t*0.45 + b.x*4));
       const sz  = sp.r * 2 * scl;
-      ctx.drawImage(sp.oc, dx, dy, sz, sz);
+      ctx.drawImage(sp.oc, b.x*W - sp.r*scl, b.y*H + Math.sin(t*0.28+b.x)*H*0.022 - sp.r*scl, sz, sz);
     }
     ctx.restore();
   }
 
-  // ── Particles — drawImage sprite, zero shadowBlur ─────────────────────────
+  // ── Particles ──────────────────────────────────────────────────────────────
   function drawParticles() {
     ctx.save();
     ctx.globalCompositeOperation = 'screen';
     for (let i = 0; i < parts.length; i++) {
       const p = parts[i];
-      p.x  += p.vx;
-      p.vy += p.drift;
-      p.y  += p.vy;
-      p.life++;
+      p.x += p.vx; p.vy += p.drift; p.y += p.vy; p.life++;
       const escaped = p.side === 'left' ? p.x > W+DOT_R : p.x < -DOT_R;
       if (p.life > p.maxLife || escaped) { parts[i] = spawnParticle(p.side); continue; }
-
-      const pr  = p.life / p.maxLife;
-      const a   = pr < 0.15 ? pr/0.15 : pr > 0.75 ? 1-(pr-0.75)/0.25 : 1;
-      const sz  = DOT_R * 2 * p.scale * (1 - pr*0.35);
-
+      const pr = p.life / p.maxLife;
+      const a  = pr < 0.15 ? pr/0.15 : pr > 0.75 ? 1-(pr-0.75)/0.25 : 1;
+      const sz = DOT_R * 2 * p.scale * (1 - pr*0.35);
       ctx.globalAlpha = a * 0.80;
-      const sprite = p.cyan ? dotCyan : dotAmber;
-      ctx.drawImage(sprite, p.x - sz/2, p.y - sz/2, sz, sz);
+      ctx.drawImage(p.cyan ? dotCyan : dotAmber, p.x - sz/2, p.y - sz/2, sz, sz);
     }
     ctx.restore();
   }
 
-  // ── Main loop ─────────────────────────────────────────────────────────────
+  // ── Loop ───────────────────────────────────────────────────────────────────
   let frame = 0;
   function loop() {
     requestAnimationFrame(loop);
     frame++;
-    const t = frame * 0.012;
-
+    const t = frame * 0.007;
     ctx.fillStyle = '#020d1a';
     ctx.fillRect(0, 0, W, H);
-
     drawBlobs(t);
-
     computeWaves(t);
-    strokeWave(wPts2, waveGrd2, 0.30, 2.5);
-    strokeWave(wPts1, waveGrd1, 0.70, 3.5);
-
+    strokeWave(wPts2, waveGrd2, 0.28, 2.5);
+    strokeWave(wPts1, waveGrd1, 0.68, 3.5);
     drawParticles();
-
-    if (vigCanvas) ctx.drawImage(vigCanvas, 0, 0);
   }
-
   loop();
 })();
 </script>
 </body>
 </html>
+
 
