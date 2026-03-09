@@ -12,7 +12,6 @@
 <body>
 	<section class="outer">
 		<div class="container">
-            <canvas id="bg-canvas"></canvas>
 			<div class="bar"><a href="index.html">← Back to portfolio</a></div>
 			<div class="case_title">
 				<h1 style="margin-top: 0; padding-top: 0;">RAVE ON TREND</h1>
@@ -79,34 +78,35 @@
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          const element = document.querySelector('.bar');
-          if (!element) return;
+document.addEventListener('DOMContentLoaded', () => {
+  const element = document.querySelector('.bar');
+  if (!element) return;
 
-          const updateHighlight = (e) => {
-            const rect = element.getBoundingClientRect();
-            const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
-            element.style.setProperty('--mouse-x', `${x}%`);
-          };
+  const updateHighlight = (e) => {
+    const rect = element.getBoundingClientRect();
+    const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+    element.style.setProperty('--mouse-x', `${x}%`);
+  };
 
-          document.addEventListener('mousemove', updateHighlight);
+  document.addEventListener('mousemove', updateHighlight);
 
 
-          document.addEventListener('mouseleave', () => {
-            element.style.removeProperty('--mouse-x');
-          });
-        });
+  document.addEventListener('mouseleave', () => {
+    element.style.removeProperty('--mouse-x');
+  });
+});
 
-//////////////////////////////////////////////////////////////
+
+
 
         document.addEventListener('DOMContentLoaded', () => {
             // превью
             const emails = [
-                { src: 'img/email_1.png', alt: 'Ярко, бодряще' },
-                { src: 'img/email_2.png', alt: 'Италия Меню' },
-                { src: 'img/email_3.png', alt: 'Пробуй новинки' },
-                { src: 'img/inapps_1.png', alt: 'In apps' },
-                { src: 'img/pop_up2.png', alt: 'Pop up' }
+                { src: 'img/email_4.png', alt: 'MNMLST BY RAVE' },
+                { src: 'img/email_5.png', alt: 'The best fits you haven’t seen yet.' },
+                { src: 'img/email_6.png', alt: 'Serving looks and turkey this year.' },
+                { src: 'img/pop_up1.png', alt: 'Loyalty Program Update' },
+                { src: 'img/email_7.png', alt: 'Welcome to Drop 4.' }
             ];
             
             // навигация
@@ -126,6 +126,7 @@
             let currentSlide = 0;
             let currentModalSlide = 0;
             
+            // Актуализируем картинки, без кэша
             const updateSlider = (index) => {
                 currentPreview.src = emails[index].src;
                 currentPreview.alt = emails[index].alt;
@@ -140,6 +141,7 @@
                 nextBtn.disabled = index === emails.length - 1;
             };
             
+            // Update modal
             const updateModal = (index) => {
                 modalImage.src = emails[index].src;
                 modalImage.alt = `Full view of ${emails[index].alt}`;
@@ -147,6 +149,7 @@
                 currentModalSlide = index;
             };
             
+            // Event Listeners
             prevBtn.addEventListener('click', () => {
                 if (currentSlide > 0) {
                     currentSlide--;
@@ -169,6 +172,7 @@
                 });
             });
             
+            // Open modal on preview click
             previewArea.addEventListener('click', () => {
                 currentModalSlide = currentSlide;
                 updateModal(currentModalSlide);
@@ -176,6 +180,7 @@
                 document.body.style.overflow = 'hidden';
             });
             
+            // Modal navigation
             modalPrevBtn.addEventListener('click', () => {
                 if (currentModalSlide > 0) {
                     currentModalSlide--;
@@ -190,11 +195,13 @@
                 }
             });
             
+            // Close modal
             closeModalBtn.addEventListener('click', () => {
                 emailModal.classList.remove('active');
                 document.body.style.overflow = 'auto';
             });
             
+            // Close modal when clicking outside content
             emailModal.addEventListener('click', (e) => {
                 if (e.target === emailModal) {
                     emailModal.classList.remove('active');
@@ -202,6 +209,7 @@
                 }
             });
             
+            // Keyboard navigation
             document.addEventListener('keydown', (e) => {
                 if (emailModal.classList.contains('active')) {
                     if (e.key === 'ArrowLeft' && currentModalSlide > 0) {
@@ -217,11 +225,9 @@
                 }
             });
             
+            // Initialize slider
             updateSlider(currentSlide);
         });
-
-
-
 (function () {
   const canvas = document.getElementById('bg-canvas');
   const container = canvas.parentElement;
