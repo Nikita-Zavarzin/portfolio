@@ -35,7 +35,7 @@
   <clipPath id="s3"><rect x="0" y="258" width="1155" height="11"/></clipPath>
 
   <style>
-    .main  { animation: flicker 7s infinite; }
+    .main  { animation: flicker 0.7s infinite; }
     .gr    { opacity:0; mix-blend-mode:screen; animation: ga 7s infinite; }
     .gc    { opacity:0; mix-blend-mode:screen; animation: gb 7s infinite; }
     .s1    { animation: sa 7s infinite; }
