@@ -7,26 +7,23 @@
   	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="icon" href="img/favicon.png" type="image/png">
 	<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
 </head>
 <body>
 	<section class="outer">
 		<div class="container">
-			<div style="display: flex;  align-items: center;  justify-content: center; padding-top: 20px; "><a href="https://t.me/nikita_zavarzin" target="_blank"><button class="contact_bt">Telegram</button></a><a href="mailto:89504372550@yandex.ru"  target="_blank"><button class="contact_bt">Почта</button></a></div>
+			<canvas id="bg-canvas"></canvas>
+			<div style="display: flex; padding-top: 20px;"><a href="https://t.me/nikita_zavarzin" target="_blank"><button class="contact_bt">Telegram</button></a><a href="mailto:89504372550@yandex.ru" target="_blank"><button class="contact_bt">Почта</button></a></div>
 			<div class="hero">
 				<img src="img/title.svg">
-				<p style="margin: 0; max-width: 650px;"><span style="font-weight: 600;">Graphic </span>&nbsp;design, <span style="font-weight: 500;">web</span>&nbsp;design, <span style="font-weight: 500;">email</span> design&nbsp;&&nbsp;DEVELOPER,  UX&nbsp;design, <span style="font-weight: 500;">MOTION</span>&nbsp;DESIGN</p>
-				
+				<p style="margin: 0; max-width: 650px;"><span style="font-weight: 500;">Graphic </span>&nbsp;design, <span style="font-weight: 500;">web</span>&nbsp;design, <span style="font-weight: 500;">email</span> design&nbsp;&amp;&nbsp;DEVELOPER,  UX&nbsp;design, <span style="font-weight: 500;">MOTION</span>&nbsp;DESIGN</p>
 				<span class="bage">PORTFOLIO</span>
-				<svg width="65" height="65" viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<g opacity="0.4">
-						<rect x="0.5" y="0.5" width="64" height="64" rx="32" stroke="white"/>
-						<path d="M31.2929 49.7071C31.6834 50.0976 32.3166 50.0976 32.7071 49.7071L39.0711 43.3431C39.4616 42.9526 39.4616 42.3195 39.0711 41.9289C38.6805 41.5384 38.0474 41.5384 37.6569 41.9289L32 47.5858L26.3431 41.9289C25.9526 41.5384 25.3195 41.5384 24.9289 41.9289C24.5384 42.3195 24.5384 42.9526 24.9289 43.3431L31.2929 49.7071ZM31 16L31 49L33 49L33 16L31 16Z" fill="white"/>
-					</g>
-				</svg>
-
+        <svg width="65" height="65" viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g opacity="0.4">
+            <rect x="0.5" y="0.5" width="64" height="64" rx="32" stroke="white"/>
+            <path d="M31.2929 49.7071C31.6834 50.0976 32.3166 50.0976 32.7071 49.7071L39.0711 43.3431C39.4616 42.9526 39.4616 42.3195 39.0711 41.9289C38.6805 41.5384 38.0474 41.5384 37.6569 41.9289L32 47.5858L26.3431 41.9289C25.9526 41.5384 25.3195 41.5384 24.9289 41.9289C24.5384 42.3195 24.5384 42.9526 24.9289 43.3431L31.2929 49.7071ZM31 16L31 49L33 49L33 16L31 16Z" fill="white"/>
+          </g>
+        </svg>
 			</div>
 			<div class="title_sec">
 				<span style="display: inline-block;">Избранные кейсы</span>
@@ -34,10 +31,10 @@
 			<div class="card-grind">
 				<a href="case1.html" class="card rs">
 					<div class="card-inner">
-						<h1>KFC, ROSTIC’S</h1>
+						<h1>KFC, ROSTIC'S</h1>
 						<div class="badge-stip">
 							<div class="badge">email design</div>
-							<div class="badge">pop-up’s</div>
+							<div class="badge">pop-up's</div>
 							<div class="badge">in-apps banners</div>
 						</div>
 					</div>
@@ -47,7 +44,7 @@
 						<h1>RAVE ON TREND</h1>
 						<div class="badge-stip">
 							<div class="badge">email design</div>
-							<div class="badge">pop-up’s</div>
+							<div class="badge">pop-up's</div>
 						</div>
 					</div>
 				</a>
@@ -56,7 +53,7 @@
 						<h1>Machindex</h1>
 						<div class="badge-stip">
 							<div class="badge">email design</div>
-							<div class="badge">pop-up’s</div>
+							<div class="badge">pop-up's</div>
 						</div>
 					</div>
 				</a>
@@ -65,16 +62,167 @@
 						<h1>Нашенька</h1>
 						<div class="badge-stip">
 							<div class="badge">email design</div>
-							<div class="badge">pop-up’s</div>
+							<div class="badge">pop-up's</div>
 						</div>
 					</div>
 				</a>
 			</div>
-			<div style="display: flex; padding-top: 20px;   align-items: center;
-  justify-content: center; border-top: 0.4px solid #fff; margin-top: 50px;"><a href="https://t.me/nikita_zavarzin" target="_blank"><button class="contact_bt">Telegram</button></a><a href="mailto:89504372550@yandex.ru"  target="_blank"><button class="contact_bt">Почта</button></a></div>
+			<div style="display: flex; padding-top: 20px; align-items: center; justify-content: center; border-top: 0.4px solid #fff; margin-top: 50px;"><a href="https://t.me/nikita_zavarzin" target="_blank"><button class="contact_bt">Telegram</button></a><a href="mailto:89504372550@yandex.ru" target="_blank"><button class="contact_bt">Почта</button></a></div>
 		</div>
 	</section>
-</body> 
+<script>
+(function () {
+  const canvas = document.getElementById('bg-canvas');
+  const container = canvas.parentElement;
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) { canvas.style.display='none'; return; }
 
+  const vert = `attribute vec2 a_pos; void main(){gl_Position=vec4(a_pos,0.,1.);}`;
+
+  const frag = `
+    precision highp float;
+    uniform float u_time;
+    uniform vec2  u_res;
+    uniform vec2  u_mouse;
+
+    vec3 mod289v3(vec3 x){return x-floor(x*(1./289.))*289.;}
+    vec2 mod289v2(vec2 x){return x-floor(x*(1./289.))*289.;}
+    vec3 permute(vec3 x){return mod289v3(((x*34.)+1.)*x);}
+    float snoise(vec2 v){
+      const vec4 C=vec4(.211324865405187,.366025403784439,-.577350269189626,.024390243902439);
+      vec2 i=floor(v+dot(v,C.yy)); vec2 x0=v-i+dot(i,C.xx);
+      vec2 i1=(x0.x>x0.y)?vec2(1.,0.):vec2(0.,1.);
+      vec4 x12=x0.xyxy+C.xxzz; x12.xy-=i1; i=mod289v2(i);
+      vec3 p=permute(permute(i.y+vec3(0.,i1.y,1.))+i.x+vec3(0.,i1.x,1.));
+      vec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);
+      m=m*m; m=m*m;
+      vec3 x2=2.*fract(p*C.www)-1.; vec3 h=abs(x2)-.5;
+      vec3 ox=floor(x2+.5); vec3 a0=x2-ox;
+      m*=1.79284291400159-.85373472095314*(a0*a0+h*h);
+      vec3 g; g.x=a0.x*x0.x+h.x*x0.y; g.yz=a0.yz*x12.xz+h.yz*x12.yw;
+      return 130.*dot(m,g);
+    }
+
+    // Hash for film grain — fast per-pixel random
+    float hash(vec2 p){
+      p = fract(p * vec2(234.34, 435.345));
+      p += dot(p, p + 34.23);
+      return fract(p.x * p.y);
+    }
+
+    vec3 palette(float t){
+      vec3 c0=vec3(.018,.042,.075);
+      vec3 c1=vec3(.032,.175,.230);
+      vec3 c2=vec3(.025,.240,.240);
+      vec3 c3=vec3(.030,.110,.210);
+      vec3 c4=vec3(.160,.072,.022);
+      vec3 c5=vec3(.015,.032,.058);
+      float s=clamp(t,0.,1.)*5.;
+      float fi=floor(s); float fr=fract(s);
+      fr=fr*fr*(3.-2.*fr);
+      vec3 a,b;
+      if(fi<1.){a=c0;b=c1;}
+      else if(fi<2.){a=c1;b=c2;}
+      else if(fi<3.){a=c2;b=c3;}
+      else if(fi<4.){a=c3;b=c4;}
+      else{a=c4;b=c5;}
+      return mix(a,b,fr);
+    }
+
+    void main(){
+      vec2 uv = gl_FragCoord.xy / u_res;
+      uv.y = 1. - uv.y;
+      float T = u_time * .00042;
+
+      // 4-octave domain-warped noise
+      float n1 = snoise(vec2(uv.x*1.4 + T*.40, uv.y*1.1 - T*.33));
+      float n2 = snoise(vec2(uv.x*2.3 - T*.26 + n1*.48, uv.y*2.5 + T*.21));
+      float n3 = snoise(vec2(uv.x*4.4 + T*.62 + n2*.40, uv.y*4.0 - T*.46));
+      float n4 = snoise(vec2(uv.x*8.5 - T*1.15 + n3*.30, uv.y*7.8 + T*.88));
+
+      float f = n1*.44 + n2*.30 + n3*.17 + n4*.09;
+      f = f*.5 + .5;
+
+      // Global hue drift ~20s
+      float drift = sin(T*.295)*.20 + cos(T*.170)*.09 + sin(T*.083)*.04;
+      float t = clamp(f + drift, 0., 1.);
+      vec3 col = palette(t);
+
+      // Mouse: barely visible warm-light glow, blends into colours
+      float md = length(uv - u_mouse);
+      float glow = exp(-md*md * 5.5);
+      // Light tint — warm slightly brighter, very subtle
+      col += vec3(.030, .045, .055) * glow * .55;
+
+      // Vignette
+      float vig = 1. - .58*pow(length((uv-.5)*vec2(1.12,1.)), 1.65);
+      col *= vig;
+
+      // Film grain — per-pixel, per-frame random noise
+      // Two layers: coarse + fine, mimics real film emulsion
+      float grain1 = hash(uv * u_res + fract(T * 1000.));
+      float grain2 = hash(uv * u_res * .5 + fract(T * 700. + .3));
+      float grain  = (grain1 * .7 + grain2 * .3) - .5;
+      // Scale grain strength: stronger in dark areas (like real film)
+      float lum = dot(col, vec3(.299,.587,.114));
+      float grainStr = mix(.028, .012, lum);
+      col += grain * grainStr;
+
+      gl_FragColor = vec4(clamp(col, 0., 1.), 1.);
+    }
+  `;
+
+  function mkShader(type,src){
+    const s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s); return s;
+  }
+  const prog=gl.createProgram();
+  gl.attachShader(prog,mkShader(gl.VERTEX_SHADER,vert));
+  gl.attachShader(prog,mkShader(gl.FRAGMENT_SHADER,frag));
+  gl.linkProgram(prog); gl.useProgram(prog);
+
+  const buf=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const aPos=gl.getAttribLocation(prog,'a_pos');
+  gl.enableVertexAttribArray(aPos); gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
+
+  const uTime  = gl.getUniformLocation(prog,'u_time');
+  const uRes   = gl.getUniformLocation(prog,'u_res');
+  const uMouse = gl.getUniformLocation(prog,'u_mouse');
+
+  let mx=.5, my=.5, tmx=.5, tmy=.5;
+  function lerp(a,b,t){return a+(b-a)*t;}
+
+  function resize(){
+    canvas.width=container.offsetWidth;
+    canvas.height=container.offsetHeight;
+    gl.viewport(0,0,canvas.width,canvas.height);
+  }
+
+  function frame(ts){
+    mx=lerp(mx,tmx,.06); my=lerp(my,tmy,.06);
+    gl.uniform1f(uTime, ts);
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.uniform2f(uMouse, mx, my);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(frame);
+  }
+
+  container.addEventListener('mousemove', e=>{
+    const r=container.getBoundingClientRect();
+    tmx=(e.clientX-r.left)/r.width;
+    tmy=1.-(e.clientY-r.top)/r.height;
+  });
+  container.addEventListener('touchmove', e=>{
+    const r=container.getBoundingClientRect();
+    tmx=(e.touches[0].clientX-r.left)/r.width;
+    tmy=1.-(e.touches[0].clientY-r.top)/r.height;
+  },{passive:true});
+
+  window.addEventListener('resize', resize);
+  resize();
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
 </html>
-
